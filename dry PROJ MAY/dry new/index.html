@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title> Dry Cleaning Certer</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@400;500;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --lime:#c8ff00;
+  --pink:#2dff3b;
+  --cyan:#00e5ff;
+  --orange:#00ff33;
+  --purple:#41645e;
+  --white:#6d5a5a;
+  --off:#296832;
+  --ink:#191958;
+  --ink2:#1a1a24;
+  --ink3:#2d2d3a;
+  --muted:#888899;
+  --border:rgba(255,255,255,0.08);
+  --grad1:linear-gradient(135deg,#c8ff00,#00e5ff);
+  --grad2:linear-gradient(135deg,#ff2d78,#7c3aff);
+  --grad3:linear-gradient(135deg,#ff6b00,#ff2d78);
+  --grad4:linear-gradient(135deg,#7c3aff,#00e5ff);
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--ink);
+  color:var(--white);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:0.4;
+}
+
+/* ── TOP NAV ── */
+.topnav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(10,10,15,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  height:64px;
+  display:flex;align-items:center;
+  padding:0 2rem;gap:0;
+}
+.nav-brand{
+  display:flex;align-items:center;gap:0.6rem;
+  margin-right:3rem;text-decoration:none;
+}
+.nav-brand-icon{
+  width:36px;height:36px;border-radius:8px;
+  background:var(--grad1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;font-weight:900;color:var(--ink);
+  font-family:'Bebas Neue',sans-serif;letter-spacing:0;
+}
+.nav-brand-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.5rem;letter-spacing:0.08em;
+  background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1;
+}
+.nav-links{display:flex;align-items:center;gap:0.25rem;flex:1}
+.nav-link{
+  padding:0.5rem 0.9rem;border-radius:6px;cursor:pointer;
+  font-size:0.8rem;font-weight:600;color:var(--muted);
+  transition:all 0.15s;letter-spacing:0.02em;white-space:nowrap;
+  border:1px solid transparent;
+  display:flex;align-items:center;gap:0.5rem;
+}
+.nav-link:hover{color:var(--white);background:rgba(255,255,255,0.06)}
+.nav-link.active{color:var(--ink);background:var(--lime);border-color:var(--lime)}
+.nav-link.active .nav-dot{background:var(--ink)}
+.nav-dot{width:6px;height:6px;border-radius:50%;background:var(--muted);transition:background 0.15s}
+.nav-right{display:flex;align-items:center;gap:0.75rem;margin-left:auto}
+.nav-badge{
+  background:var(--pink);color:var(--white);
+  border-radius:50%;width:20px;height:20px;
+  font-size:0.6rem;font-weight:800;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.avatar{
+  width:34px;height:34px;border-radius:50%;
+  background:var(--grad2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.75rem;font-weight:800;cursor:pointer;
+}
+.btn{
+  padding:0.5rem 1.1rem;border-radius:6px;border:none;cursor:pointer;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:0.78rem;font-weight:700;
+  transition:all 0.18s;letter-spacing:0.02em;}
+.btn-lime{background:var(--lime);color:var(--ink)}.btn-lime:hover{background:#d4ff1a;transform:translateY(-1px)}
+.btn-ghost{background:rgba(255,255,255,0.06);color:var(--white);border:1px solid var(--border)}.btn-ghost:hover{background:rgba(255,255,255,0.1)}
+.btn-sm{padding:0.35rem 0.8rem;font-size:0.72rem}
+.btn-pink{background:var(--pink);color:var(--white)}.btn-pink:hover{background:#ff4d88}
+.btn-danger{background:rgba(255,45,120,0.15);color:var(--pink);border:1px solid rgba(255,45,120,0.3)}
+
+/* ── MAIN ── */
+.main{margin-top:64px;padding:2.5rem 2rem;min-height:calc(100vh - 64px);position:relative;z-index:1}
+
+/* ── PAGES ── */
+.page{display:none;animation:fadeUp 0.4s ease both}
+.page.active{display:block}
+
+/* ── HERO STATS ── */
+.hero-bar{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;
+  margin-bottom:2.5rem;
+}
+.hero-stat{
+  border-radius:16px;padding:1.6rem;position:relative;overflow:hidden;
+  cursor:default;transition:transform 0.2s;
+}
+.hero-stat:hover{transform:translateY(-3px)}
+.hero-stat.g1{background:var(--grad1)}
+.hero-stat.g2{background:var(--grad2)}
+.hero-stat.g3{background:var(--grad3)}
+.hero-stat.g4{background:var(--grad4)}
+.hero-stat::after{
+  content:'';position:absolute;top:-30%;right:-10%;
+  width:120px;height:120px;border-radius:50%;
+  background:rgba(255,255,255,0.12);
+}
+.hs-label{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;opacity:0.7;margin-bottom:0.5rem;color:var(--ink)}
+.hs-value{font-family:'Bebas Neue',sans-serif;font-size:3.2rem;line-height:1;color:var(--ink);margin-bottom:0.3rem}
+.hs-sub{font-size:0.72rem;font-weight:600;color:var(--ink);opacity:0.6}
+
+/* ── GRID LAYOUT ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
+.span-2{grid-column:span 2}
+
+/* ── PANELS ── */
+.panel{
+  background:var(--ink2);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;
+  margin-bottom:1.5rem;
+}
+.panel-head{
+  padding:1.2rem 1.6rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  gap:1rem;flex-wrap:wrap;
+}
+.panel-title{
+  font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.08em;
+  color:var(--white);
+}
+.panel-body{padding:1.4rem 1.6rem}
+
+/* ── TABLE ── */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th{
+  font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);font-weight:700;padding:0.7rem 1rem;
+  border-bottom:1px solid var(--border);text-align:left;
+  background:rgba(255,255,255,0.02);
+}
+td{
+  padding:0.9rem 1rem;font-size:0.82rem;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  font-family:'DM Mono',monospace;vertical-align:middle;
+}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,0.025)}
+.oid{color:var(--lime);font-weight:500;font-size:0.8rem}
+.cust{font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:0.84rem;color:var(--white)}
+
+/* ── BADGES ── */
+.badge{
+  display:inline-flex;align-items:center;gap:0.3rem;
+  padding:0.22rem 0.6rem;border-radius:20px;
+  font-size:0.62rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+  font-family:'Plus Jakarta Sans',sans-serif;
+}
+.badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}
+.b-ready{background:rgba(200,255,0,0.15);color:var(--lime)}
+.b-proc{background:rgba(255,107,0,0.15);color:var(--orange)}
+.b-pend{background:rgba(0,229,255,0.15);color:var(--cyan)}
+.b-paid{background:rgba(200,255,0,0.12);color:var(--lime)}
+.b-unpaid{background:rgba(255,45,120,0.15);color:var(--pink)}
+.b-on{background:rgba(200,255,0,0.15);color:var(--lime)}
+.b-off{background:rgba(136,136,153,0.15);color:var(--muted)}
+.b-ok{background:rgba(200,255,0,0.15);color:var(--lime)}
+.b-low{background:rgba(255,107,0,0.15);color:var(--orange)}
+.b-out{background:rgba(255,45,120,0.15);color:var(--pink)}
+
+/* ── QUICK ACTIONS ── */
+.qa-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+.qa-card{
+  background:var(--ink2);border:1px solid var(--border);border-radius:12px;
+  padding:1.2rem;cursor:pointer;transition:all 0.2s;
+  display:flex;flex-direction:column;gap:0.5rem;
+}
+.qa-card:hover{border-color:var(--lime);transform:translateY(-2px);background:rgba(200,255,0,0.04)}
+.qa-icon{font-size:1.6rem;line-height:1}
+.qa-label{font-size:0.78rem;font-weight:700;color:var(--white)}
+.qa-sub{font-size:0.68rem;color:var(--muted)}
+
+/* ── ACTIVITY FEED ── */
+.activity-item{
+  display:flex;align-items:flex-start;gap:1rem;
+  padding:0.9rem 0;border-bottom:1px solid var(--border);
+}
+.activity-item:last-child{border-bottom:none}
+.act-dot{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:0.9rem;
+}
+.act-dot.lime{background:rgba(200,255,0,0.15)}
+.act-dot.pink{background:rgba(255,45,120,0.15)}
+.act-dot.cyan{background:rgba(0,229,255,0.15)}
+.act-dot.orange{background:rgba(255,107,0,0.15)}
+.act-text{font-size:0.82rem;color:var(--white);font-weight:500;line-height:1.4}
+.act-time{font-size:0.7rem;color:var(--muted);margin-top:2px;font-family:'DM Mono',monospace}
+
+/* ── EMP CARDS ── */
+.emp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;padding:1.4rem}
+.emp-card{
+  background:var(--ink3);border:1px solid var(--border);border-radius:12px;
+  padding:1.2rem;transition:all 0.2s;
+}
+.emp-card:hover{border-color:var(--cyan);transform:translateY(-2px)}
+.emp-av{
+  width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;font-weight:900;color:var(--ink);
+  margin-bottom:0.8rem;font-family:'Bebas Neue',sans-serif;letter-spacing:0.05em;
+}
+.emp-name{font-size:0.9rem;font-weight:700;margin-bottom:2px}
+.emp-role{font-size:0.68rem;color:var(--muted);margin-bottom:0.7rem;letter-spacing:0.04em}
+.emp-row{display:flex;justify-content:space-between;font-size:0.72rem;color:var(--muted);margin-top:0.5rem}
+.emp-row strong{color:var(--white)}
+
+/* ── INV BAR ── */
+.inv-bar-wrap{height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;margin-top:6px;width:100px}
+.inv-bar{height:100%;border-radius:3px;transition:width 0.5s ease}
+
+/* ── PORTAL ── */
+.portal-center{max-width:600px;margin:0 auto}
+.portal-hero{
+  text-align:center;padding:3rem 1rem 2rem;
+  background:linear-gradient(180deg,rgba(200,255,0,0.06) 0%,transparent 100%);
+  border-radius:20px;margin-bottom:2rem;
+  border:1px solid rgba(200,255,0,0.1);
+}
+.portal-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:3rem;letter-spacing:0.1em;
+  background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:0.5rem;
+}
+.portal-sub{font-size:0.88rem;color:var(--muted)}
+.portal-steps{display:flex;margin:1.5rem 0;gap:0}
+.ps{
+  flex:1;text-align:center;padding:0.6rem 0.3rem;
+  font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--muted);border-bottom:2px solid rgba(255,255,255,0.08);
+  transition:all 0.3s;font-weight:700;
+}
+.ps.done{color:var(--lime);border-bottom-color:var(--lime)}
+.ps.current{color:var(--orange);border-bottom-color:var(--orange)}
+.pd-row{display:flex;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid var(--border);font-size:0.84rem}
+.pd-row:last-child{border-bottom:none}
+.pd-label{color:var(--muted)}.pd-val{font-weight:600;font-family:'DM Mono',monospace}
+
+/* ── REPORTS ── */
+.rev-bar-wrap{margin-bottom:1.2rem}
+.rev-bar-top{display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:6px}
+.rev-bar-bg{height:10px;background:rgba(255,255,255,0.06);border-radius:5px;overflow:hidden}
+.rev-bar-fill{height:100%;border-radius:5px;transition:width 0.8s ease}
+
+/* ── MODALS ── */
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:500;
+  display:none;align-items:center;justify-content:center;
+  backdrop-filter:blur(8px);
+}
+.overlay.open{display:flex}
+.modal{
+  background:var(--ink2);border:1px solid var(--border);
+  border-radius:20px;width:520px;max-width:95vw;max-height:92vh;
+  overflow-y:auto;animation:scaleIn 0.25s ease;
+}
+.modal-head{
+  padding:1.6rem 1.8rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.modal-title{
+  font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.08em;
+}
+.modal-x{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.4rem;line-height:1;transition:color 0.15s}
+.modal-x:hover{color:var(--pink)}
+.modal-body{padding:1.8rem}
+.modal-foot{padding:1.2rem 1.8rem;border-top:1px solid var(--border);display:flex;gap:0.75rem;justify-content:flex-end}
+.fl{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px;font-weight:700}
+.fc{
+  width:100%;padding:0.65rem 0.9rem;
+  background:var(--ink3);border:1px solid var(--border);
+  border-radius:8px;color:var(--white);
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;outline:none;
+  transition:border-color 0.15s;
+}
+.fc:focus{border-color:var(--lime)}
+select.fc option{background:var(--ink2)}
+.fg{margin-bottom:1rem}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.receipt-box{
+  background:var(--ink3);border:1px solid var(--border);
+  border-radius:10px;padding:1.2rem;margin-top:1rem;
+  font-family:'DM Mono',monospace;font-size:0.78rem;
+}
+.rr{display:flex;justify-content:space-between;padding:0.2rem 0;color:var(--muted)}
+.rr.rtot{border-top:1px solid var(--border);margin-top:6px;padding-top:6px;color:var(--lime);font-weight:700;font-size:0.9rem}
+
+/* ── LOGIN ── */
+#login-screen{
+  position:fixed;inset:0;
+  background:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  z-index:9999;
+}
+.login-bg{
+  position:absolute;inset:0;overflow:hidden;
+}
+.login-blob{
+  position:absolute;border-radius:50%;filter:blur(80px);opacity:0.25;animation:float 6s ease-in-out infinite;
+}
+.login-blob.b1{width:400px;height:400px;background:var(--lime);top:-10%;left:-10%;animation-delay:0s}
+.login-blob.b2{width:350px;height:350px;background:var(--pink);bottom:-10%;right:-5%;animation-delay:2s}
+.login-blob.b3{width:300px;height:300px;background:var(--cyan);top:40%;left:60%;animation-delay:4s}
+.login-box{
+  position:relative;z-index:1;
+  background:rgba(26,26,36,0.9);
+  border:1px solid var(--border);border-radius:24px;
+  padding:2.8rem;width:400px;max-width:95vw;
+  backdrop-filter:blur(20px);
+  animation:scaleIn 0.4s ease;
+}
+.login-logo{
+  font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:0.1em;
+  background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:4px;
+}
+.login-tagline{font-size:0.72rem;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:2.2rem}
+.login-input{
+  width:100%;padding:0.75rem 1rem;
+  background:rgba(255,255,255,0.05);border:1px solid var(--border);
+  border-radius:10px;color:var(--white);
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:0.9rem;outline:none;
+  transition:border-color 0.15s;margin-bottom:1rem;
+}
+.login-input:focus{border-color:var(--lime)}
+.login-input::placeholder{color:rgba(255,255,255,0.2)}
+.login-btn{
+  width:100%;padding:0.85rem;
+  background:var(--lime);border:none;border-radius:10px;
+  color:var(--ink);font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.95rem;font-weight:800;cursor:pointer;
+  transition:all 0.2s;letter-spacing:0.02em;
+}
+.login-btn:hover{background:#d4ff1a;transform:translateY(-1px)}
+.login-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.login-err{color:var(--pink);font-size:0.78rem;margin-top:0.8rem;text-align:center;background:rgba(255,45,120,0.1);padding:0.5rem;border-radius:8px;display:none}
+.login-hint{font-size:0.7rem;color:var(--muted);text-align:center;margin-top:1rem}
+
+/* ── LOADING ── */
+.loading{position:fixed;inset:0;background:rgba(10,10,15,0.9);z-index:600;display:none;align-items:center;justify-content:center;flex-direction:column;gap:1rem}
+.loading.show{display:flex}
+.spin{width:40px;height:40px;border:3px solid rgba(200,255,0,0.2);border-top-color:var(--lime);border-radius:50%;animation:spin 0.7s linear infinite}
+.spin-label{font-size:0.72rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase}
+
+/* ── PRINT ── */
+#print-area{display:none}
+@media print{
+  body>*{display:none!important}
+  #print-area{display:block!important;font-family:monospace;font-size:12px;color:#000;padding:20px;max-width:300px;margin:0 auto}
+  #print-area h2{text-align:center;font-size:18px;margin-bottom:4px}
+  #print-area .pr-sub{text-align:center;font-size:11px;margin-bottom:16px;color:#555}
+  #print-area .pr-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px dashed #ccc}
+  #print-area .pr-total{display:flex;justify-content:space-between;padding:6px 0;font-weight:bold;font-size:14px;border-top:2px solid #000;margin-top:4px}
+  #print-area .pr-foot{text-align:center;margin-top:14px;font-size:10px;color:#888}
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.93)}to{opacity:1;transform:scale(1)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── SEARCH BAR ── */
+.search-wrap{display:flex;align-items:center;gap:0.6rem;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:8px;padding:0.45rem 0.9rem;width:220px}
+.search-wrap input{background:none;border:none;outline:none;color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.8rem;flex:1}
+.search-wrap input::placeholder{color:var(--muted)}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:0.5rem;margin-bottom:1.5rem}
+.tab{padding:0.5rem 1rem;border-radius:6px;font-size:0.78rem;font-weight:700;cursor:pointer;color:var(--muted);border:1px solid transparent;transition:all 0.15s;letter-spacing:0.02em}
+.tab:hover{color:var(--white);background:rgba(255,255,255,0.05)}
+.tab.active{background:rgba(200,255,0,0.12);color:var(--lime);border-color:rgba(200,255,0,0.25)}
+
+/* SECTION DIVIDER */
+.sec-label{font-family:'Bebas Neue',sans-serif;font-size:0.95rem;letter-spacing:0.15em;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+</style>
+</head>
+<body>
+
+<div id="print-area"></div>
+<div class="loading" id="loading"><div class="spin"></div><div class="spin-label">Loading data...</div></div>
+
+<!-- ══ LOGIN ══ -->
+<div id="login-screen">
+  <div class="login-bg">
+    <div class="login-blob b1"></div>
+    <div class="login-blob b2"></div>
+    <div class="login-blob b3"></div>
+  </div>
+  <div class="login-box">
+    <div class="login-logo">JHAY</div>
+    <div class="login-tagline">Dry Cleaning Center</div>
+    <input class="login-input" id="li-email" type="email" placeholder="Staff email address" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <input class="login-input" id="li-pass" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button class="login-btn" id="li-btn" onclick="doLogin()">Sign In →</button>
+    <div class="login-err" id="li-err"></div>
+    <div class="login-hint">Contact your manager to get access</div>
+  </div>
+</div>
+
+<!-- ══ APP ══ -->
+<div id="app" style="display:none">
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <a class="nav-brand" href="#">
+    <div class="nav-brand-icon">JAY</div>
+    <div class="nav-brand-name">LAUNDRY</div>
+  </a>
+  <div class="nav-links">
+    <div class="nav-link active" onclick="showPage('dashboard',this)"><span class="nav-dot"></span>Dashboard</div>
+    <div class="nav-link" onclick="showPage('orders',this)"><span class="nav-dot"></span>Orders</div>
+    <div class="nav-link" onclick="showPage('billing',this)"><span class="nav-dot"></span>Billing</div>
+    <div class="nav-link" onclick="showPage('employees',this)"><span class="nav-dot"></span>Employees</div>
+    <div class="nav-link" onclick="showPage('inventory',this)"><span class="nav-dot"></span>Inventory</div>
+    <div class="nav-link" onclick="showPage('customers',this)"><span class="nav-dot"></span>Customers</div>
+    <div class="nav-link" onclick="showPage('pickup',this)"><span class="nav-dot"></span>Pickup Portal</div>
+    <div class="nav-link" onclick="showPage('reports',this)"><span class="nav-dot"></span>Reports</div>
+  </div>
+  <div class="nav-right">
+    <div class="search-wrap"><span style="color:var(--muted);font-size:0.85rem">⌕</span><input type="text" placeholder="Search..."/></div>
+    <button class="btn btn-lime btn-sm" onclick="openModal('newOrder')">+ New Order</button>
+    <div class="avatar" id="user-av" onclick="doLogout()" title="Click to sign out">?</div>
+  </div>
+</nav>
+
+<div class="main">
+
+  <!-- ══ DASHBOARD ══ -->
+  <div class="page active" id="page-dashboard">
+    <div class="hero-bar">
+      <div class="hero-stat g1">
+        <div class="hs-label">Total Orders</div>
+        <div class="hs-value" id="s-orders">—</div>
+        <div class="hs-sub">In system</div>
+      </div>
+      <div class="hero-stat g2">
+        <div class="hs-label">Active</div>
+        <div class="hs-value" id="s-active">—</div>
+        <div class="hs-sub">Pending + Processing</div>
+      </div>
+      <div class="hero-stat g3">
+        <div class="hs-label">Unpaid Bills</div>
+        <div class="hs-value" id="s-unpaid">—</div>
+        <div class="hs-sub">Outstanding invoices</div>
+      </div>
+      <div class="hero-stat g4">
+        <div class="hs-label">On Duty</div>
+        <div class="hs-value" id="s-duty">—</div>
+        <div class="hs-sub">Staff clocked in</div>
+      </div>
+    </div>
+
+    <div class="sec-label">Quick Actions</div>
+    <div class="qa-grid">
+      <div class="qa-card" onclick="openModal('newOrder')"><div class="qa-icon">📋</div><div class="qa-label">New Order</div><div class="qa-sub">Create a new garment order</div></div>
+      <div class="qa-card" onclick="openModal('newInvoice')"><div class="qa-icon">💳</div><div class="qa-label">New Invoice</div><div class="qa-sub">Bill a customer</div></div>
+      <div class="qa-card" onclick="openModal('clockIn')"><div class="qa-icon">🕐</div><div class="qa-label">Clock In/Out</div><div class="qa-sub">Manage staff attendance</div></div>
+      <div class="qa-card" onclick="showPage('pickup',null)"><div class="qa-icon">🏷️</div><div class="qa-label">Pickup Portal</div><div class="qa-sub">Track customer orders</div></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-head"><span class="panel-title">Recent Orders</span><button class="btn btn-ghost btn-sm" onclick="showPage('orders',null)">View All →</button></div>
+        <div class="tbl-wrap"><table><thead><tr><th>ID</th><th>Customer</th><th>Item</th><th>Status</th><th>Total</th></tr></thead><tbody id="db-orders"></tbody></table></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><span class="panel-title">Live Activity</span></div>
+        <div class="panel-body" id="activity-feed"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ORDERS ══ -->
+  <div class="page" id="page-orders">
+    <div class="tabs">
+      <div class="tab active" onclick="filterOrders('all',this)">All Orders</div>
+      <div class="tab" onclick="filterOrders('Pending',this)">Pending</div>
+      <div class="tab" onclick="filterOrders('Processing',this)">Processing</div>
+      <div class="tab" onclick="filterOrders('Ready',this)">Ready</div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-title">Orders</span><button class="btn btn-lime btn-sm" onclick="openModal('newOrder')">+ New Order</button></div>
+      <div class="tbl-wrap"><table><thead><tr><th>Order ID</th><th>Customer</th><th>Item</th><th>Service</th><th>Status</th><th>Assigned</th><th>Due</th><th>Total</th><th>Payment</th><th>Actions</th></tr></thead><tbody id="orders-tb"></tbody></table></div>
+    </div>
+  </div>
+
+  <!-- ══ BILLING ══ -->
+  <div class="page" id="page-billing">
+    <div class="hero-bar" style="grid-template-columns:repeat(3,1fr)">
+      <div class="hero-stat g1"><div class="hs-label">Total Revenue</div><div class="hs-value" id="b-rev">$0</div><div class="hs-sub">All time</div></div>
+      <div class="hero-stat g2"><div class="hs-label">Outstanding</div><div class="hs-value" id="b-out">0</div><div class="hs-sub">Unpaid invoices</div></div>
+      <div class="hero-stat g3"><div class="hs-label">Collected</div><div class="hs-value" id="b-coll">$0</div><div class="hs-sub">Paid invoices</div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-title">Invoices</span><button class="btn btn-lime btn-sm" onclick="openModal('newInvoice')">+ New Invoice</button></div>
+      <div class="tbl-wrap"><table><thead><tr><th>Invoice #</th><th>Customer</th><th>Order</th><th>Date</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead><tbody id="billing-tb"></tbody></table></div>
+    </div>
+  </div>
+
+<!-- ══ EMPLOYEES ══ -->
+  <div class="page" id="page-employees">
+    <div class="panel">
+      <div class="panel-head">
+        <span class="panel-title">Staff Directory</span>
+        <div style="display:flex;gap:0.5rem">
+          <button class="btn btn-ghost btn-sm" onclick="openModal('clockIn')">🕐 Clock In/Out</button>
+          <button class="btn btn-lime btn-sm" onclick="openModal('newEmployee')">+ Add Staff</button>
+        </div>
+      </div>
+      <div class="emp-grid" id="emp-grid"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span class="panel-title">Shift Log</span></div>
+      <div class="tbl-wrap"><table><thead><tr><th>Name</th><th>Role</th><th>Clock In</th><th>Clock Out</th><th>Orders</th><th>Status</th></tr></thead><tbody id="shift-tb"></tbody></table></div>
+    </div>
+  </div>
+
+  <!-- ══ INVENTORY ══ -->
+  <div class="page" id="page-inventory">
+    <div class="panel">
+      <div class="panel-head"><span class="panel-title">Supply Inventory</span><button class="btn btn-lime btn-sm" onclick="openModal('newItem')">+ Add Item</button></div>
+      <div class="tbl-wrap"><table><thead><tr><th>Item</th><th>Category</th><th>Stock</th><th>Min Level</th><th>Cost</th><th>Level</th><th>Status</th><th>Actions</th></tr></thead><tbody id="inv-tb"></tbody></table></div>
+    </div>
+  </div>
+
+  <!-- ══ CUSTOMERS ══ -->
+  <div class="page" id="page-customers">
+    <div class="panel">
+      <div class="panel-head"><span class="panel-title">Customers</span><button class="btn btn-lime btn-sm" onclick="openModal('newCustomer')">+ Add Customer</button></div>
+      <div class="tbl-wrap"><table><thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Orders</th><th>Spent</th><th>Status</th></tr></thead><tbody id="cust-tb"></tbody></table></div>
+    </div>
+  </div>
+
+  <!-- ══ PICKUP PORTAL ══ -->
+  <div class="page" id="page-pickup">
+    <div class="portal-center">
+      <div class="portal-hero">
+        <div class="portal-title">ORDER TRACKER</div>
+        <div class="portal-sub">Enter your Order ID or phone number to check garment status</div>
+        <div style="display:flex;gap:0.75rem;margin-top:1.5rem;max-width:420px;margin-left:auto;margin-right:auto">
+          <input class="fc" id="portal-q" type="text" placeholder="ORD-001 or 555-0101" onkeydown="if(event.key==='Enter')portalSearch()" style="background:rgba(255,255,255,0.06)"/>
+          <button class="btn btn-lime" onclick="portalSearch()">Track →</button>
+        </div>
+      </div>
+      <div id="portal-result" style="display:none">
+        <div class="panel">
+          <div class="panel-body">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem">
+              <div>
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.08em;color:var(--lime)" id="pr-id"></div>
+                <div style="font-size:0.82rem;color:var(--muted)">Customer: <span id="pr-cust" style="color:var(--white);font-weight:600"></span></div>
+              </div>
+              <button class="btn btn-ghost btn-sm" onclick="window.print()">🖨️ Print</button>
+            </div>
+            <div class="portal-steps" id="pr-steps"></div>
+            <div style="margin-top:1.2rem">
+              <div class="pd-row"><span class="pd-label">Item</span><span class="pd-val" id="pr-item"></span></div>
+              <div class="pd-row"><span class="pd-label">Service</span><span class="pd-val" id="pr-svc"></span></div>
+              <div class="pd-row"><span class="pd-label">Due Date</span><span class="pd-val" id="pr-due"></span></div>
+              <div class="pd-row"><span class="pd-label">Total</span><span class="pd-val" id="pr-total" style="color:var(--lime)"></span></div>
+              <div class="pd-row"><span class="pd-label">Payment</span><span class="pd-val" id="pr-paid"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="portal-err" style="display:none;color:var(--pink);text-align:center;padding:1.2rem;background:rgba(255,45,120,0.08);border:1px solid rgba(255,45,120,0.2);border-radius:12px">
+        No order found. Check the order ID or phone number and try again.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ REPORTS ══ -->
+  <div class="page" id="page-reports">
+    <div class="hero-bar">
+      <div class="hero-stat g1"><div class="hs-label">Total Revenue</div><div class="hs-value" id="rp-rev">$0</div><div class="hs-sub">All orders</div></div>
+      <div class="hero-stat g2"><div class="hs-label">Completed</div><div class="hs-value" id="rp-done">0</div><div class="hs-sub">Ready orders</div></div>
+      <div class="hero-stat g3"><div class="hs-label">Customers</div><div class="hs-value" id="rp-cust">0</div><div class="hs-sub">Total registered</div></div>
+      <div class="hero-stat g4"><div class="hs-label">Staff</div><div class="hs-value" id="rp-staff">0</div><div class="hs-sub">Total employees</div></div>
+    </div>
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-head"><span class="panel-title">Revenue by Service</span><button class="btn btn-ghost btn-sm" onclick="exportCSV()">⬇ Export CSV</button></div>
+        <div class="panel-body" id="rev-chart"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><span class="panel-title">Order Status Breakdown</span></div>
+        <div class="panel-body" id="status-chart"></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+</div><!-- /app -->
+
+<!-- ══ MODALS ══ -->
+
+<!-- New Order -->
+<div class="overlay" id="modal-newOrder">
+  <div class="modal">
+    <div class="modal-head"><span class="modal-title">New Order</span><button class="modal-x" onclick="closeModal('newOrder')">✕</button></div>
+    <div class="modal-body">
+      <div class="fr">
+        <div class="fg"><label class="fl">Customer Name</label><input class="fc" id="o-name" type="text" placeholder="Full name"/></div>
+        <div class="fg"><label class="fl">Phone</label><input class="fc" id="o-phone" type="text" placeholder="555-0000"/></div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label class="fl">Service</label>
+          <select class="fc" id="o-service" onchange="calcTotal()">
+            <option value="">Select...</option>
+            <option>Dry Cleaning</option><option>Laundry</option><option>Alterations</option><option>Pressing</option>
+          </select>
+        </div>
+        <div class="fg"><label class="fl">Item</label>
+          <select class="fc" id="o-item" onchange="calcTotal()">
+            <option value="">Select...</option>
+            <option value="Suit Jacket" data-price="18">Suit Jacket — $18</option>
+            <option value="Shirt" data-price="6">Shirt — $6</option>
+            <option value="Trousers" data-price="10">Trousers — $10</option>
+            <option value="Dress" data-price="22">Dress — $22</option>
+            <option value="Coat" data-price="30">Coat — $30</option>
+            <option value="Blanket" data-price="25">Blanket — $25</option>
+            <option value="Tie" data-price="8">Tie — $8</option>
+          </select>
+        </div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label class="fl">Quantity</label><input class="fc" id="o-qty" type="number" value="1" min="1" onchange="calcTotal()"/></div>
+        <div class="fg"><label class="fl">Due Date</label><input class="fc" id="o-due" type="date"/></div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label class="fl">Assign To</label><select class="fc" id="o-assign"><option value="">Unassigned</option></select></div>
+        <div class="fg"><label class="fl">Notes</label><input class="fc" id="o-notes" type="text" placeholder="Special instructions"/></div>
+      </div>
+      <div class="receipt-box">
+        <div style="font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-weight:700">Order Summary</div>
+        <div class="rr"><span>Item</span><span id="r-item">—</span></div>
+        <div class="rr"><span>Service</span><span id="r-svc">—</span></div>
+        <div class="rr"><span>Qty × Price</span><span id="r-calc">—</span></div>
+        <div class="rr rtot"><span>TOTAL</span><span id="r-total">$0.00</span></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('newOrder')">Cancel</button>
+      <button class="btn btn-lime" id="btn-order" onclick="submitOrder()">Create Order</button>
+    </div>
+  </div>
+</div>
+
+<!-- New Invoice -->
+<div class="overlay" id="modal-newInvoice">
+  <div class="modal">
+    <div class="modal-head"><span class="modal-title">New Invoice</span><button class="modal-x" onclick="closeModal('newInvoice')">✕</button></div>
+    <div class="modal-body">
+      <div class="fr">
+        <div class="fg"><label class="fl">Customer</label><input class="fc" id="inv-cust" type="text"/></div>
+        <div class="fg"><label class="fl">Order ID</label><input class="fc" id="inv-ord" type="text" placeholder="ORD-000"/></div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label class="fl">Amount ($)</label><input class="fc" id="inv-amt" type="number" placeholder="0.00"/></div>
+        <div class="fg"><label class="fl">Due Date</label><input class="fc" id="inv-due" type="date"/></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('newInvoice')">Cancel</button>
+      <button class="btn btn-lime" onclick="submitInvoice()">Create</button>
+    </div>
+  </div>
+</div>
+
+<!-- New Employee -->
+<div class="overlay" id="modal-newEmployee">
+  <div class="modal">
+    <div class="modal-head"><span class="modal-title">Add Staff Member</span><button class="modal-x" onclick="closeModal('newEmployee')">✕</button></div>
+    <div class="modal-body">
+      <div class="fr">
+        <div class="fg"><label class="fl">Full Name</label><input class="fc" id="em-name" type="text"/></div>
+        <div class="fg"><label class="fl">Role</label><select class="fc" id="em-role"><option>Cleaner</option><option>Presser</option><option>Front Desk</option><option>Supervisor</option><option>Driver</option></select></div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label class="fl">Phone</label><input class="fc" id="em-phone" type="text"/></div>
+        <div class="fg"><label class="fl">Hourly Rate ($)</label><input class="fc" id="em-rate" type="number" placeholder="15"/></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('newEmployee')">Cancel</button>
+      <button class="btn btn-lime" onclick="submitEmployee()">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Clock In/Out -->
+<div class="overlay" id="modal-clockIn">
+  <div class="modal">
+    <div class="modal-head"><span class="modal-title">🕐 Clock In / Out</span><button class="modal-x" onclick="closeModal('clockIn')">✕</button></div>
+    <div class="modal-body">
+      <div class="fg"><label class="fl">Employee</label><select class="fc" id="cl-emp"></select></div>
+      <div class="fg"><label class="fl">Action</label><select class="fc" id="cl-act"><option value="in">Clock In</option><option value="out">Clock Out</option></select></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('clockIn')">Cancel</button>
+      <button class="btn btn-lime" onclick="submitClock()">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- New Inventory Item -->
+<div class="overlay" id="modal-newItem">
+  <div class="modal">
+    <div class="modal-head"><span class="modal-title">Add Inventory Item</span><button class="modal-x" onclick="closeModal('newItem')">✕</button></div>
+    <div class="modal-body">
+      <div class="fr">
+        <div class="fg"><label class="fl">Item Name</label><input class="fc" id="it-name" type="text"/></div>
+        <div class="fg"><label class="fl">Category</label><select class="fc" id="it-cat"><option>Packaging</option><option>Chemicals</option><option>Equipment</option><option>Tags & Labels</option><option>Other</option></select></div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label class="fl">Quantity</label><input class="fc" id="it-qty" type="number" placeholder="0"/></div>
+        <div class="fg"><label class="fl">Min Level</label><input class="fc" id="it-min" type="number" placeholder="0"/></div>
+      </div>
+      <div class="fg"><label class="fl">Unit Cost ($)</label><input class="fc" id="it-cost" type="number" placeholder="0.00"/></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('newItem')">Cancel</button>
+      <button class="btn btn-lime" onclick="submitItem()">Add Item</button>
+    </div>
+  </div>
+</div>
+
+<!-- New Customer -->
+<div class="overlay" id="modal-newCustomer">
+  <div class="modal">
+    <div class="modal-head"><span class="modal-title">Add Customer</span><button class="modal-x" onclick="closeModal('newCustomer')">✕</button></div>
+    <div class="modal-body">
+      <div class="fr">
+        <div class="fg"><label class="fl">Full Name</label><input class="fc" id="cu-name" type="text"/></div>
+        <div class="fg"><label class="fl">Phone</label><input class="fc" id="cu-phone" type="text"/></div>
+      </div>
+      <div class="fg"><label class="fl">Email</label><input class="fc" id="cu-email" type="email"/></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('newCustomer')">Cancel</button>
+      <button class="btn btn-lime" onclick="submitCustomer()">Add</button>
+    </div>
+  </div>
+</div>
+
+<!-- Receipt Modal -->
+<div class="overlay" id="modal-receipt">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-head"><span class="modal-title">Receipt</span><button class="modal-x" onclick="closeModal('receipt')">✕</button></div>
+    <div class="modal-body" id="receipt-html" style="font-family:'DM Mono',monospace;font-size:0.82rem"></div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('receipt')">Close</button>
+      <button class="btn btn-ghost btn-sm" onclick="exportTxt()">⬇ Export</button>
+      <button class="btn btn-lime btn-sm" onclick="window.print()">🖨️ Print</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════
+// ⚠️  ADD YOUR SUPABASE CREDENTIALS TO GO LIVE
+// ════════════════════════════════════════════
+const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
+const SUPABASE_KEY = 'YOUR_ANON_PUBLIC_KEY';
+// ════════════════════════════════════════════
+
+// Demo mode — runs with sample data if no Supabase credentials
+const DEMO_MODE = SUPABASE_URL.includes('YOUR_PROJECT');
+let sb = null;
+if(!DEMO_MODE){
+  // Only init if script loaded
+  try{ sb = window.supabase?.createClient(SUPABASE_URL, SUPABASE_KEY); }catch(e){}
+}
+
+// ── SAMPLE DATA (demo mode) ──
+let orders=[
+  {id:'ORD-001',customer:'Margaret Hill',phone:'555-0101',items:'Suit Jacket',service:'Dry Cleaning',qty:2,status:'Ready',due:'2026-05-06',total:36,paid:false,assigned:'Rosa P.',notes:''},
+  {id:'ORD-002',customer:'James Okafor',phone:'555-0182',items:'Dress',service:'Dry Cleaning',qty:1,status:'Processing',due:'2026-05-07',total:22,paid:false,assigned:'Dev K.',notes:'Handle gently'},
+  {id:'ORD-003',customer:'Priya Nair',phone:'555-0234',items:'Shirt',service:'Laundry',qty:5,status:'Pending',due:'2026-05-08',total:30,paid:true,assigned:'',notes:''},
+  {id:'ORD-004',customer:'Liam Torres',phone:'555-0399',items:'Coat',service:'Dry Cleaning',qty:1,status:'Ready',due:'2026-05-06',total:30,paid:false,assigned:'Rosa P.',notes:''},
+  {id:'ORD-005',customer:'Sofia Becker',phone:'555-0411',items:'Trousers',service:'Pressing',qty:3,status:'Processing',due:'2026-05-09',total:30,paid:true,assigned:'Dev K.',notes:''},
+];
+let invoices=[
+  {id:'INV-001',customer:'Margaret Hill',order_id:'ORD-001',date:'2026-05-04',amount:36,status:'Unpaid'},
+  {id:'INV-002',customer:'James Okafor',order_id:'ORD-002',date:'2026-05-04',amount:22,status:'Unpaid'},
+  {id:'INV-003',customer:'Priya Nair',order_id:'ORD-003',date:'2026-05-03',amount:30,status:'Paid'},
+  {id:'INV-004',customer:'Liam Torres',order_id:'ORD-004',date:'2026-05-05',amount:30,status:'Unpaid'},
+  {id:'INV-005',customer:'Sofia Becker',order_id:'ORD-005',date:'2026-05-02',amount:30,status:'Paid'},
+];
+let employees=[
+  {id:'1',name:'Rosa Perez',role:'Cleaner',phone:'555-1001',rate:16,on_duty:true,clock_in:'08:00',clock_out:null,orders_count:12,efficiency:94},
+  {id:'2',name:'Dev Kumar',role:'Presser',phone:'555-1002',rate:15,on_duty:true,clock_in:'08:30',clock_out:null,orders_count:9,efficiency:91},
+  {id:'3',name:'Tina Marsh',role:'Front Desk',phone:'555-1003',rate:14,on_duty:true,clock_in:'09:00',clock_out:null,orders_count:0,efficiency:88},
+  {id:'4',name:'Carlos Vega',role:'Supervisor',phone:'555-1004',rate:20,on_duty:true,clock_in:'07:45',clock_out:null,orders_count:5,efficiency:96},
+  {id:'5',name:'Amy Lin',role:'Driver',phone:'555-1005',rate:15,on_duty:false,clock_in:null,clock_out:null,orders_count:0,efficiency:89},
+  {id:'6',name:'Ben Osei',role:'Cleaner',phone:'555-1006',rate:16,on_duty:false,clock_in:null,clock_out:null,orders_count:0,efficiency:87},
+];
+let inventory=[
+  {id:'1',name:'Dry Clean Bags',category:'Packaging',qty:320,min_level:100,cost:0.12},
+  {id:'2',name:'Perchloroethylene',category:'Chemicals',qty:48,min_level:20,cost:18.50},
+  {id:'3',name:'Hangers (wire)',category:'Packaging',qty:1200,min_level:400,cost:0.05},
+  {id:'4',name:'Garment Tags',category:'Tags & Labels',qty:85,min_level:200,cost:0.03},
+  {id:'5',name:'Stain Remover',category:'Chemicals',qty:32,min_level:15,cost:9.75},
+  {id:'6',name:'Poly Bags (large)',category:'Packaging',qty:410,min_level:150,cost:0.09},
+];
+let customers=[
+  {id:'1',name:'Margaret Hill',phone:'555-0101',email:'m.hill@email.com',orders_count:14,total_spent:420,active:true},
+  {id:'2',name:'James Okafor',phone:'555-0182',email:'james.o@email.com',orders_count:7,total_spent:210,active:true},
+  {id:'3',name:'Priya Nair',phone:'555-0234',email:'priya.n@email.com',orders_count:22,total_spent:680,active:true},
+  {id:'4',name:'Liam Torres',phone:'555-0399',email:'liam.t@email.com',orders_count:3,total_spent:95,active:false},
+  {id:'5',name:'Sofia Becker',phone:'555-0411',email:'sofia.b@email.com',orders_count:18,total_spent:540,active:true},
+];
+let orderCounter=6, invoiceCounter=6;
+let currentReceipt=null;
+
+// ── LOADING ──
+function showLoad(){document.getElementById('loading').classList.add('show')}
+function hideLoad(){document.getElementById('loading').classList.remove('show')}
+
+// ── AUTH ──
+async function initAuth(){
+  if(DEMO_MODE){
+    // Demo: skip login
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('app').style.display='block';
+    document.getElementById('user-av').textContent='DM';
+    renderAll();
+    return;
+  }
+  showLoad();
+  const {data:{session}}=await sb.auth.getSession();
+  hideLoad();
+  if(session){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('app').style.display='block';
+    const initials=session.user.email.substring(0,2).toUpperCase();
+    document.getElementById('user-av').textContent=initials;
+    await loadData();
+  }
+}
+
+async function doLogin(){
+  if(DEMO_MODE){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('app').style.display='block';
+    document.getElementById('user-av').textContent='DM';
+    renderAll();return;
+  }
+  const email=document.getElementById('li-email').value.trim();
+  const pass=document.getElementById('li-pass').value;
+  const errEl=document.getElementById('li-err');
+  const btn=document.getElementById('li-btn');
+  if(!email||!pass){errEl.textContent='Enter email and password.';errEl.style.display='block';return;}
+  btn.disabled=true;btn.textContent='Signing in...';
+  const {data,error}=await sb.auth.signInWithPassword({email,password:pass});
+  btn.disabled=false;btn.textContent='Sign In →';
+  if(error){errEl.textContent=error.message;errEl.style.display='block';return;}
+  errEl.style.display='none';
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('app').style.display='block';
+  document.getElementById('user-av').textContent=data.user.email.substring(0,2).toUpperCase();
+  await loadData();
+}
+
+async function doLogout(){
+  if(!confirm('Sign out?'))return;
+  if(!DEMO_MODE)await sb.auth.signOut();
+  document.getElementById('app').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('li-pass').value='';
+}
+
+async function loadData(){
+  if(DEMO_MODE){renderAll();return;}
+  showLoad();
+  try{
+    const [o,inv,emp,invt,cust]=await Promise.all([
+      sb.from('orders').select('*').order('created_at',{ascending:false}),
+      sb.from('invoices').select('*').order('created_at',{ascending:false}),
+      sb.from('employees').select('*'),
+      sb.from('inventory').select('*'),
+      sb.from('customers').select('*'),
+    ]);
+    orders=o.data||[];invoices=inv.data||[];
+    employees=emp.data||[];inventory=invt.data||[];customers=cust.data||[];
+    if(orders.length){const ns=orders.map(x=>parseInt(x.id.replace('ORD-',''))||0);orderCounter=Math.max(...ns)+1;}
+    if(invoices.length){const ns=invoices.map(x=>parseInt(x.id.replace('INV-',''))||0);invoiceCounter=Math.max(...ns)+1;}
+    renderAll();
+  }catch(e){console.error(e);}
+  hideLoad();
+}
+
+async function save(table,data){
+  if(DEMO_MODE)return {error:null};
+  return sb.from(table).insert([data]);
+}
+async function update(table,data,col,val){
+  if(DEMO_MODE)return {error:null};
+  return sb.from(table).update(data).eq(col,val);
+}
+async function remove(table,col,val){
+  if(DEMO_MODE)return {error:null};
+  return sb.from(table).delete().eq(col,val);
+}
+
+// ── BADGES ──
+function sb2(s){const m={Ready:'b-ready',Processing:'b-proc',Pending:'b-pend'};return`<span class="badge ${m[s]||'b-pend'}">${s}</span>`}
+function pb(p){return p?'<span class="badge b-paid">Paid</span>':'<span class="badge b-unpaid">Unpaid</span>'}
+function ib(s){return s==='Paid'?'<span class="badge b-paid">Paid</span>':'<span class="badge b-unpaid">Unpaid</span>'}
+function stb(it){if(it.qty===0)return'<span class="badge b-out">Out</span>';if(it.qty<it.min_level)return'<span class="badge b-low">Low</span>';return'<span class="badge b-ok">OK</span>'}
+
+// ── RENDERS ──
+function renderDashboard(){
+  document.getElementById('s-orders').textContent=orders.length;
+  document.getElementById('s-active').textContent=orders.filter(o=>o.status==='Pending'||o.status==='Processing').length;
+  document.getElementById('s-unpaid').textContent=invoices.filter(i=>i.status==='Unpaid').length;
+  document.getElementById('s-duty').textContent=employees.filter(e=>e.on_duty).length;
+  // recent orders
+  document.getElementById('db-orders').innerHTML=orders.slice(0,5).map(o=>`
+    <tr><td class="oid">${o.id}</td><td><span class="cust">${o.customer}</span></td>
+    <td>${o.items} ×${o.qty}</td><td>${sb2(o.status)}</td>
+    <td style="color:var(--lime);font-weight:700">$${o.total}</td></tr>`).join('');
+  // activity feed
+  const acts=[
+    {icon:'📋',col:'lime',text:`Order ${orders[0]?.id||'ORD-001'} created for ${orders[0]?.customer||'customer'}`,time:'2 min ago'},
+    {icon:'✅',col:'cyan',text:`${orders[1]?.customer||'James O.'}'s order moved to Processing`,time:'15 min ago'},
+    {icon:'💳',col:'pink',text:`Invoice ${invoices[0]?.id||'INV-001'} sent to ${invoices[0]?.customer||'customer'}`,time:'32 min ago'},
+    {icon:'👷',col:'orange',text:`${employees.find(e=>e.on_duty)?.name||'Rosa P.'} clocked in`,time:'1 hr ago'},
+    {icon:'📦',col:'lime',text:'Garment Tags stock running low',time:'2 hr ago'},
+  ];
+  document.getElementById('activity-feed').innerHTML=acts.map(a=>`
+    <div class="activity-item">
+      <div class="act-dot ${a.col}">${a.icon}</div>
+      <div><div class="act-text">${a.text}</div><div class="act-time">${a.time}</div></div>
+    </div>`).join('');
+}
+
+let orderFilter='all';
+function renderOrders(filter){
+  const list=filter&&filter!=='all'?orders.filter(o=>o.status===filter):orders;
+  document.getElementById('orders-tb').innerHTML=list.map(o=>`
+    <tr><td class="oid">${o.id}</td>
+    <td><span class="cust">${o.customer}</span><br><span style="color:var(--muted);font-size:0.7rem">${o.phone||''}</span></td>
+    <td>${o.items}</td><td style="color:var(--muted)">${o.service}</td>
+    <td>${sb2(o.status)}</td>
+    <td style="color:var(--muted)">${o.assigned||'—'}</td>
+    <td style="font-family:'DM Mono',monospace">${o.due||'—'}</td>
+    <td style="color:var(--lime);font-weight:700">$${o.total}</td>
+    <td>${pb(o.paid)}</td>
+    <td style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="btn btn-ghost btn-sm" onclick="cycleStatus('${o.id}','${o.status}')">↻</button>
+      <button class="btn btn-ghost btn-sm" onclick="showReceipt(${JSON.stringify(o).replace(/"/g,'&quot;')})">🧾</button>
+      <button class="btn btn-danger btn-sm" onclick="deleteOrder('${o.id}')">✕</button>
+    </td></tr>`).join('');
+}
+
+function renderBilling(){
+  const total=invoices.reduce((a,i)=>a+parseFloat(i.amount),0);
+  const paid=invoices.filter(i=>i.status==='Paid').reduce((a,i)=>a+parseFloat(i.amount),0);
+  const unpaidCount=invoices.filter(i=>i.status==='Unpaid').length;
+  document.getElementById('b-rev').textContent='$'+total.toFixed(0);
+  document.getElementById('b-out').textContent=unpaidCount;
+  document.getElementById('b-coll').textContent='$'+paid.toFixed(0);
+  document.getElementById('billing-tb').innerHTML=invoices.map(i=>`
+    <tr><td class="oid">${i.id}</td><td><span class="cust">${i.customer}</span></td>
+    <td style="color:var(--cyan)">${i.order_id||'—'}</td>
+    <td style="font-family:'DM Mono',monospace">${i.date||'—'}</td>
+    <td style="color:var(--lime);font-weight:700">$${i.amount}</td>
+    <td>${ib(i.status)}</td>
+    <td>${i.status==='Unpaid'?`<button class="btn btn-lime btn-sm" onclick="markPaid('${i.id}')">Mark Paid</button>`:'<span style="color:var(--muted);font-size:0.75rem">✓</span>'}</td>
+    </tr>`).join('');
+}
+
+function renderEmployees(){
+  const grads=['linear-gradient(135deg,#c8ff00,#00e5ff)','linear-gradient(135deg,#ff2d78,#7c3aff)','linear-gradient(135deg,#ff6b00,#ff2d78)','linear-gradient(135deg,#7c3aff,#00e5ff)'];
+  document.getElementById('emp-grid').innerHTML=employees.map((e,i)=>`
+    <div class="emp-card">
+      <div class="emp-av" style="background:${grads[i%grads.length]}">${e.name.split(' ').map(n=>n[0]).join('')}</div>
+      <div class="emp-name">${e.name}</div>
+      <div class="emp-role">${e.role} · $${e.rate}/hr</div>
+      ${e.on_duty?'<span class="badge b-on">On Duty</span>':'<span class="badge b-off">Off</span>'}
+      <div class="emp-row"><span>Orders</span><strong>${e.orders_count||0}</strong></div>
+      <div class="emp-row"><span>Efficiency</span><strong style="color:var(--lime)">${e.efficiency||90}%</strong></div>
+    </div>`).join('');
+  document.getElementById('shift-tb').innerHTML=employees.map(e=>`
+    <tr><td><span class="cust">${e.name}</span></td>
+    <td style="color:var(--muted)">${e.role}</td>
+    <td style="color:var(--lime);font-family:'DM Mono',monospace">${e.clock_in||'—'}</td>
+    <td style="color:var(--muted);font-family:'DM Mono',monospace">${e.clock_out||'—'}</td>
+    <td style="font-weight:700">${e.orders_count||0}</td>
+    <td>${e.on_duty?'<span class="badge b-on">On Duty</span>':'<span class="badge b-off">Off</span>'}</td></tr>`).join('');
+  // update dropdowns
+  const as=document.getElementById('o-assign');
+  if(as)as.innerHTML='<option value="">Unassigned</option>'+employees.filter(e=>e.on_duty).map(e=>`<option>${e.name}</option>`).join('');
+  const cs=document.getElementById('cl-emp');
+  if(cs)cs.innerHTML=employees.map(e=>`<option value="${e.id}">${e.name} (${e.on_duty?'On Duty':'Off'})</option>`).join('');
+}
+
+function renderInventory(){
+  document.getElementById('inv-tb').innerHTML=inventory.map((it,i)=>{
+    const pct=Math.min(100,Math.round(it.qty/Math.max(it.qty,it.min_level*1.5||1)*100));
+    const col=it.qty<it.min_level?'var(--pink)':it.qty<it.min_level*1.5?'var(--orange)':'var(--lime)';
+    return`<tr><td><span class="cust">${it.name}</span></td>
+    <td style="color:var(--muted)">${it.category}</td>
+    <td style="font-weight:700;color:${it.qty<it.min_level?'var(--pink)':'var(--white)'}">${it.qty}</td>
+    <td style="color:var(--muted)">${it.min_level}</td>
+    <td style="font-family:'DM Mono',monospace">$${it.cost.toFixed(2)}</td>
+    <td><div class="inv-bar-wrap"><div class="inv-bar" style="width:${pct}%;background:${col}"></div></div></td>
+    <td>${stb(it)}</td>
+    <td style="display:flex;gap:4px">
+      <button class="btn btn-ghost btn-sm" onclick="restockItem('${it.id}',${it.qty})">+Stock</button>
+      <button class="btn btn-danger btn-sm" onclick="deleteItem('${it.id}')">✕</button>
+    </td></tr>`;}).join('');
+}
+
+function renderCustomers(){
+  document.getElementById('cust-tb').innerHTML=customers.map(c=>`
+    <tr><td><span class="cust">${c.name}</span></td>
+    <td style="font-family:'DM Mono',monospace">${c.phone||'—'}</td>
+    <td style="color:var(--muted)">${c.email||'—'}</td>
+    <td style="font-weight:700">${c.orders_count||0}</td>
+    <td style="color:var(--lime);font-weight:700">$${c.total_spent||0}</td>
+    <td>${c.active?'<span class="badge b-on">Active</span>':'<span class="badge b-unpaid">Inactive</span>'}</td></tr>`).join('');
+}
+
+function renderReports(){
+  document.getElementById('rp-rev').textContent='$'+orders.reduce((a,o)=>a+parseFloat(o.total),0).toFixed(0);
+  document.getElementById('rp-done').textContent=orders.filter(o=>o.status==='Ready').length;
+  document.getElementById('rp-cust').textContent=customers.length;
+  document.getElementById('rp-staff').textContent=employees.length;
+  const svcRev={};orders.forEach(o=>{svcRev[o.service]=(svcRev[o.service]||0)+parseFloat(o.total)});
+  const total=Object.values(svcRev).reduce((a,b)=>a+b,0)||1;
+  const cols={'Dry Cleaning':'var(--lime)','Laundry':'var(--orange)','Alterations':'var(--cyan)','Pressing':'var(--pink)'};
+  document.getElementById('rev-chart').innerHTML=Object.entries(svcRev).map(([s,r])=>`
+    <div class="rev-bar-wrap">
+      <div class="rev-bar-top"><span>${s}</span><span style="color:${cols[s]||'var(--lime)'}">$${r.toFixed(0)} · ${Math.round(r/total*100)}%</span></div>
+      <div class="rev-bar-bg"><div class="rev-bar-fill" style="width:${Math.round(r/total*100)}%;background:${cols[s]||'var(--lime)'}"></div></div>
+    </div>`).join('');
+  const statuses=['Pending','Processing','Ready'];
+  const sc={};statuses.forEach(s=>sc[s]=orders.filter(o=>o.status===s).length);
+  const scols={Pending:'var(--cyan)',Processing:'var(--orange)',Ready:'var(--lime)'};
+  const stotal=orders.length||1;
+  document.getElementById('status-chart').innerHTML=statuses.map(s=>`
+    <div class="rev-bar-wrap">
+      <div class="rev-bar-top"><span>${s}</span><span style="color:${scols[s]}">${sc[s]} orders · ${Math.round(sc[s]/stotal*100)}%</span></div>
+      <div class="rev-bar-bg"><div class="rev-bar-fill" style="width:${Math.round(sc[s]/stotal*100)}%;background:${scols[s]}"></div></div>
+    </div>`).join('');
+}
+
+function renderAll(){renderDashboard();renderOrders(orderFilter);renderBilling();renderEmployees();renderInventory();renderCustomers();renderReports();}
+
+// ── PAGE NAV ──
+function showPage(name,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  if(el){document.querySelectorAll('.nav-link').forEach(n=>n.classList.remove('active'));el.classList.add('active')}
+}
+
+// ── MODALS ──
+function openModal(id){document.getElementById('modal-'+id).classList.add('open')}
+function closeModal(id){document.getElementById('modal-'+id).classList.remove('open')}
+document.querySelectorAll('.overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
+
+// ── CALC ──
+function calcTotal(){
+  const sel=document.getElementById('o-item');
+  const opt=sel.options[sel.selectedIndex];
+  const price=parseFloat(opt?.dataset?.price||0);
+  const qty=parseInt(document.getElementById('o-qty').value)||1;
+  document.getElementById('r-item').textContent=opt?.value||'—';
+  document.getElementById('r-svc').textContent=document.getElementById('o-service').value||'—';
+  document.getElementById('r-calc').textContent=`${qty} × $${price.toFixed(2)}`;
+  document.getElementById('r-total').textContent='$'+(price*qty).toFixed(2);
+}
+
+// ── SUBMITS ──
+async function submitOrder(){
+  const name=document.getElementById('o-name').value.trim();
+  const phone=document.getElementById('o-phone').value.trim();
+  const service=document.getElementById('o-service').value;
+  const isel=document.getElementById('o-item');
+  const item=isel.options[isel.selectedIndex]?.value;
+  const price=parseFloat(isel.options[isel.selectedIndex]?.dataset?.price||0);
+  const qty=parseInt(document.getElementById('o-qty').value)||1;
+  const due=document.getElementById('o-due').value;
+  const assigned=document.getElementById('o-assign').value;
+  const notes=document.getElementById('o-notes').value;
+  if(!name||!service||!item)return alert('Fill all required fields.');
+  const id='ORD-'+String(orderCounter).padStart(3,'0');
+  const btn=document.getElementById('btn-order');
+  btn.disabled=true;btn.textContent='Saving...';
+  const newOrder={id,customer:name,phone,items:item,service,qty,status:'Pending',due:due||null,total:price*qty,paid:false,assigned:assigned||null,notes:notes||null};
+  const {error}=await save('orders',newOrder);
+  btn.disabled=false;btn.textContent='Create Order';
+  if(error)return alert('Error: '+error.message);
+  if(DEMO_MODE)orders.unshift(newOrder);
+  orderCounter++;closeModal('newOrder');
+  ['o-name','o-phone','o-notes'].forEach(f=>document.getElementById(f).value='');
+  ['o-service','o-item','o-assign'].forEach(f=>document.getElementById(f).value='');
+  document.getElementById('o-qty').value=1;document.getElementById('o-due').value='';
+  if(!DEMO_MODE)await loadData();else renderAll();
+}
+
+async function submitInvoice(){
+  const customer=document.getElementById('inv-cust').value.trim();
+  const order_id=document.getElementById('inv-ord').value.trim();
+  const amount=parseFloat(document.getElementById('inv-amt').value)||0;
+  if(!customer)return alert('Enter customer name.');
+  const id='INV-'+String(invoiceCounter).padStart(3,'0');
+  const newInv={id,customer,order_id:order_id||null,date:new Date().toISOString().split('T')[0],amount,status:'Unpaid'};
+  const {error}=await save('invoices',newInv);
+  if(error)return alert('Error: '+error.message);
+  if(DEMO_MODE)invoices.unshift(newInv);
+  invoiceCounter++;closeModal('newInvoice');
+  if(!DEMO_MODE)await loadData();else renderAll();
+}
+
+async function submitEmployee(){
+  const name=document.getElementById('em-name').value.trim();
+  const role=document.getElementById('em-role').value;
+  const phone=document.getElementById('em-phone').value.trim();
+  const rate=parseFloat(document.getElementById('em-rate').value)||15;
+  if(!name)return alert('Enter name.');
+  const newEmp={id:String(Date.now()),name,role,phone,rate,on_duty:false,clock_in:null,clock_out:null,orders_count:0,efficiency:90};
+  const {error}=await save('employees',newEmp);
+  if(error)return alert('Error: '+error.message);
+  if(DEMO_MODE)employees.push(newEmp);
+  closeModal('newEmployee');
+  if(!DEMO_MODE)await loadData();else renderAll();
+}
+
+async function submitClock(){
+  const empId=document.getElementById('cl-emp').value;
+  const action=document.getElementById('cl-act').value;
+  const now=new Date();
+  const t=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  const upd=action==='in'?{on_duty:true,clock_in:t,clock_out:null}:{on_duty:false,clock_out:t};
+  const {error}=await update('employees',upd,'id',empId);
+  if(error)return alert('Error: '+error.message);
+  if(DEMO_MODE){const e=employees.find(x=>x.id===empId);if(e)Object.assign(e,upd);}
+  closeModal('clockIn');
+  if(!DEMO_MODE)await loadData();else renderAll();
+}
+
+async function submitItem(){
+  const name=document.getElementById('it-name').value.trim();
+  const category=document.getElementById('it-cat').value;
+  const qty=parseInt(document.getElementById('it-qty').value)||0;
+  const min_level=parseInt(document.getElementById('it-min').value)||0;
+  const cost=parseFloat(document.getElementById('it-cost').value)||0;
+  if(!name)return alert('Enter item name.');
+  const newItem={id:String(Date.now()),name,category,qty,min_level,cost};
+  const {error}=await save('inventory',newItem);
+  if(error)return alert('Error: '+error.message);
+  if(DEMO_MODE)inventory.push(newItem);
+  closeModal('newItem');
+  if(!DEMO_MODE)await loadData();else renderAll();
+}
+
+async function submitCustomer(){
+  const name=document.getElementById('cu-name').value.trim();
+  const phone=document.getElementById('cu-phone').value.trim();
+  const email=document.getElementById('cu-email').value.trim();
+  if(!name)return alert('Enter name.');
+  const newC={id:String(Date.now()),name,phone,email,orders_count:0,total_spent:0,active:true};
+  const {error}=await save('customers',newC);
+  if(error)return alert('Error: '+error.message);
+  if(DEMO_MODE)customers.push(newC);
+  closeModal('newCustomer');
+  if(!DEMO_MODE)await loadData();else renderAll();
+}
+
+// ── ACTIONS ──
+function filterOrders(status,el){
+  orderFilter=status;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderOrders(status==='all'?null:status);
+}
+
+async function cycleStatus(id,current){
+  const cycle={Pending:'Processing',Processing:'Ready',Ready:'Pending'};
+  const next=cycle[current]||'Pending';
+  await update('orders',{status:next},'id',id);
+  if(DEMO_MODE){const o=orders.find(x=>x.id===id);if(o)o.status=next;}
+  if(!DEMO_MODE)await loadData();else renderAll();
+}
+
+async function deleteOrder(id){
+  if(!confirm('Delete this order?'))return;
+  await remove('orders','id',id);
+  if(DEMO_MODE)orders=orders.filter(o=>o.id!==id);
+  if(!DEMO_MODE)await loadData();else renderAll();
+}
+
+async function markPaid(id){
+  await update('invoices',{status:'Paid'},'id',id);
+  if(DEMO_MODE){const i=invoices.find(x=>x.id===id);if(i)i.status='Paid';}
+  if(!DEMO_MODE)await loadData();else renderAll();
+}
+
+async function restockItem(id,current){
+  const n=prompt('Add how many units?','50');
+  if(!n)return;
+  const newQty=current+parseInt(n);
+  await update('inventory',{qty:newQty},'id',id);
+  if(DEMO_MODE){const it=inventory.find(x=>x.id===id);if(it)it.qty=newQty;}
+  if(!DEMO_MODE)await loadData();else renderAll();
+}
+
+async function deleteItem(id){
+  if(!confirm('Remove this item?'))return;
+  await remove('inventory','id',id);
+  if(DEMO_MODE)inventory=inventory.filter(x=>x.id!==id);
+  if(!DEMO_MODE)await loadData();else renderAll();
+}
+
+// ── RECEIPTS ──
+function buildReceiptHTML(o){
+  return`<div style="text-align:center;margin-bottom:1.2rem">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.12em;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent">PressedPro</div>
+    <div style="font-size:0.65rem;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase">Receipt · ${new Date().toLocaleDateString()}</div>
+  </div>
+  <div style="border-top:1px dashed rgba(255,255,255,0.1);border-bottom:1px dashed rgba(255,255,255,0.1);padding:0.8rem 0;margin-bottom:0.8rem">
+    <div class="rr"><span>Order</span><span style="color:var(--lime)">${o.id}</span></div>
+    <div class="rr"><span>Customer</span><span>${o.customer}</span></div>
+    <div class="rr"><span>Phone</span><span>${o.phone||'—'}</span></div>
+  </div>
+  <div class="rr"><span>Item</span><span>${o.items} ×${o.qty}</span></div>
+  <div class="rr"><span>Service</span><span>${o.service}</span></div>
+  <div class="rr"><span>Due</span><span>${o.due||'—'}</span></div>
+  <div class="rr"><span>Status</span><span>${o.status}</span></div>
+  ${o.notes?`<div class="rr"><span>Notes</span><span>${o.notes}</span></div>`:''}
+  <div class="rr rtot"><span>TOTAL</span><span>$${parseFloat(o.total).toFixed(2)}</span></div>
+  <div class="rr"><span>Payment</span><span style="color:${o.paid?'var(--lime)':'var(--pink)'}">${o.paid?'✓ Paid':'⚠ Unpaid'}</span></div>
+  <div style="text-align:center;margin-top:1.2rem;font-size:0.65rem;color:var(--muted)">Thank you for choosing PressedPro · (555) 000-0000</div>`;
+}
+
+function showReceipt(o){
+  currentReceipt=o;
+  document.getElementById('receipt-html').innerHTML=buildReceiptHTML(o);
+  buildPrint(o);openModal('receipt');
+}
+
+function buildPrint(o){
+  document.getElementById('print-area').innerHTML=`
+    <h2>PressedPro</h2><div class="pr-sub">Receipt · ${new Date().toLocaleDateString()}</div>
+    <div class="pr-row"><span>Order</span><span>${o.id}</span></div>
+    <div class="pr-row"><span>Customer</span><span>${o.customer}</span></div>
+    <div class="pr-row"><span>Item</span><span>${o.items} ×${o.qty}</span></div>
+    <div class="pr-row"><span>Service</span><span>${o.service}</span></div>
+    <div class="pr-row"><span>Due</span><span>${o.due||'—'}</span></div>
+    <div class="pr-total"><span>TOTAL</span><span>$${parseFloat(o.total).toFixed(2)}</span></div>
+    <div class="pr-row"><span>Payment</span><span>${o.paid?'Paid':'Unpaid'}</span></div>
+    <div class="pr-foot">Thank you for choosing Jay ! · 09036954022</div>`;
+}
+
+function exportTxt(){
+  if(!currentReceipt)return;
+  const o=currentReceipt;
+  const txt=`PressedPro Receipt\n${'═'.repeat(28)}\nOrder: ${o.id}\nCustomer: ${o.customer}\nItem: ${o.items} x${o.qty}\nService: ${o.service}\nDue: ${o.due||'—'}\nStatus: ${o.status}\n${'─'.repeat(28)}\nTOTAL: $${parseFloat(o.total).toFixed(2)}\nPayment: ${o.paid?'Paid':'Unpaid'}\n${'═'.repeat(28)}\nThank you for choosing PressedPro!`;
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/plain'}));
+  a.download=`Receipt-${o.id}.txt`;a.click();
+}
+
+// ── PORTAL ──
+function portalSearch(){
+  const q=document.getElementById('portal-q').value.trim();
+  const res=document.getElementById('portal-result');
+  const err=document.getElementById('portal-err');
+  res.style.display='none';err.style.display='none';
+  const o=orders.find(x=>x.id===q.toUpperCase()||x.phone===q);
+  if(!o){err.style.display='block';return;}
+  document.getElementById('pr-id').textContent=o.id;
+  document.getElementById('pr-cust').textContent=o.customer;
+  document.getElementById('pr-item').textContent=o.items+' ×'+o.qty;
+  document.getElementById('pr-svc').textContent=o.service;
+  document.getElementById('pr-due').textContent=o.due||'—';
+  document.getElementById('pr-total').textContent='$'+parseFloat(o.total).toFixed(2);
+  document.getElementById('pr-paid').textContent=o.paid?'✓ Paid':'⚠ Unpaid';
+  const steps=['Pending','Processing','Ready','Collected'];
+  const ci=steps.indexOf(o.status);
+  document.getElementById('pr-steps').innerHTML=steps.map((s,i)=>`<div class="ps ${i<ci?'done':i===ci?'current':''}">${s}</div>`).join('');
+  res.style.display='block';
+  currentReceipt=o;buildPrint(o);
+}
+
+// ── CSV ──
+function exportCSV(){
+  const rows=[['Order ID','Customer','Items','Service','Qty','Status','Due','Total','Paid'],
+    ...orders.map(o=>[o.id,o.customer,o.items,o.service,o.qty,o.status,o.due,o.total,o.paid?'Yes':'No'])];
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([rows.map(r=>r.join(',')).join('\n')],{type:'text/csv'}));
+  a.download='pressedpro-orders.csv';a.click();
+}
+
+// ── INIT ──
+initAuth();
+</script>
+</body>
+</html>
